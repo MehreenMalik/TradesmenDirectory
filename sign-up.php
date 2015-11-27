@@ -100,10 +100,9 @@ include ('include/header.html');
 		I have read and accept the <a href="user-agreement.php" target="_blank">User agreement</a> and <a href="privacy-policy.php" target="_blank">Privacy Policy</a>
 		<input type="checkbox" name="agreement" required>
 	</p>
-	<div id="buttons">
-		<input type="submit" name="Submit" value="Submit">
-		<input type="reset" name="Reset" value="Reset">
-	</div>
+
+		<input type="submit" name="Submit" value="Submit" id="button">
+		<input type="reset" name="Reset" value="Reset" id="button">
 </fieldset>
 
 </form>

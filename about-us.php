@@ -2,17 +2,14 @@
 include ('include/header.html');
 ?>
 
-	<div id="about-us">
-		<h2>Welcome to Tradesmen Directory</h2>
+	<div id="textAreas">
+		<h2>Welcome to yourjobdone.ie</h2>
 
 		<p>
-		Founded in 2015 by three college students as a project, <a href="index.php">TradesmenDirectory</a> has grown to sucessful meet peoples needs.
-		</p>
-
-		<p>
-		<a href="index.php">TradesmenDirectory</a> was set up after noticing a need for an online local tradesmen directory in Ireland. The site is designed to
-		make finding a local tradesmen easier then ever before. The site currently has over 200 tradesmen signed up around Ireland. There's tradesmen to suit all
-		budgets and jobs.
+		Created in 2015 by three college students as a project <a href="index.php">yourjobdone.ie</a>.
+		<br>
+		<a href="index.php">yourjobdone.ie</a> was set up after noticing a need for an online tradesmen directory in Ireland. The site is designed to
+		make finding a tradesmen easy. The directory has tradesmen from all many professions.
 		</p>
 
 		<p>
