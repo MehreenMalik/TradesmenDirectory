@@ -1,63 +1,51 @@
-<html>
-<head>
-	<title>Index</title>
-
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
-<body>
-<?php
+	<?php
 include ('include/header.html');
 ?>
 
-	<form action="#"<
-	<div id="container">
+<h2>Tradesmen</h2>
+	<form action="#" style="background-image:url(images/edited2.jpg); background-repeat:no-repeat; height:300px;">
 
 	<input type="text" name="keyword" placeholder="Enter Keyword" id="entkey">
-
 	<br>
 
    <select id="trade">
-  <option value="selecttrade">Select Trade</option>
-  <option value="brick">Brick Layer</option>
-  <option value="builder">Builder</option>
-  <option value="carpenter">Carpenter</option>
-  <option value="cleaner">Cleaner</option>
-  <option value="drainage">Drainage Specalist</option>
-  <option value="electrician">Electrician</option>
-  <option value="floor">Floor Specalist</option>
-  <option value="gardener">Gardener</option>
-  <option value="handyman">HandyMan</option>
-  <option value="heating">Heating Engineer</option>
-  <option value="kitchen">Kitchen Specalist</option>
-  <option value="lock">Locksmith</option>
-  <option value="painter">Painter</option>
-  <option value="plumber">Plumber</option>
-  <option value="roofer">Roofer</option>
-  <option value="tiler">Tiler</option>
-  <option value="window">Window Specalist</option>
+	   <option value="selecttrade">Select Trade</option>
+	   <option value="brick">Brick Layer</option>
+	   <option value="builder">Builder</option>
+	   <option value="carpenter">Carpenter</option>
+	   <option value="cleaner">Cleaner</option>
+	   <option value="drainage">Drainage Specalist</option>
+	   <option value="electrician">Electrician</option>
+	   <option value="floor">Floor Specalist</option>
+	   <option value="gardener">Gardener</option>
+	   <option value="handyman">HandyMan</option>
+	   <option value="heating">Heating Engineer</option>
+	   <option value="kitchen">Kitchen Specalist</option>
+	   <option value="lock">Locksmith</option>
+	   <option value="painter">Painter</option>
+	   <option value="plumber">Plumber</option>
+	   <option value="roofer">Roofer</option>
+	   <option value="tiler">Tiler</option>
+	   <option value="window">Window Specalist</option>
    </select>
 
    <br>
 
-
    <select id="area">
-  <option value="selectarea">Select Area</option>
-  <option value="blanchardstown">Blanchardstown</option>
-  <option value="corduff">Corduff</option>
-  <option value="clonsilla">Clonsilla</option>
-  <option value="coolmine">Coolmine</option>
-  <option value="hartstown">Hartstown</option>
-  <option value="hunstdown">Huntstown</option>
-  <option value="mulhuddart">Mulhuddart</option>
-  <option value="tyrrelstown">Tyrrelstown</option>
-
+	   <option value="selectarea">Select Area</option>
+	   <option value="blanchardstown">Blanchardstown</option>
+	   <option value="corduff">Corduff</option>
+	   <option value="clonsilla">Clonsilla</option>
+	   <option value="coolmine">Coolmine</option>
+	   <option value="hartstown">Hartstown</option>
+	   <option value="hunstdown">Huntstown</option>
+	   <option value="mulhuddart">Mulhuddart</option>
+	   <option value="tyrrelstown">Tyrrelstown</option>
    </select>
 
   <br>
 
-  <input type="submit" value="Search Jobs" id="but">
-
-  </div>
+  <input type="submit" value="Search Jobs" id="button">
 
 </form>
 
@@ -73,7 +61,6 @@ include ('include/header.html');
 		<li><a href="url">Drainage Specalist</a></li>
 		<br>
 		<li><a href="url">Electrician</a></li>
-
 	</ul>
 
 	<ul id="list2">
@@ -88,10 +75,11 @@ include ('include/header.html');
 		<li><a href="url">Kitchen Specalist</a></li>
 		<br>
 		<li><a href="url">Locksmith</a></li>
-
 	</ul>
-	<br>
+
 	<ul id="list3">
+		<li><a href="#">Pest Control</li>
+		<br>
 		<li><a href="url">Painter</a></li>
 		<br>
 		<li><a href="url">Plumber</a></li>
@@ -101,9 +89,8 @@ include ('include/header.html');
 		<li><a href="url">Tiler</a></li>
 		<br>
 		<li><a href="url">Window Specalist</a></li>
-
-
 	</ul>
+</div>
 
 </body>
 </html>

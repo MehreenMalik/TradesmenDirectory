@@ -30,8 +30,6 @@ function display_sign_up_page($error)
 	$email = isset($_REQUEST['email'])? $_REQUEST['email']:'';
 	$trade = isset($_REQUEST['trade'])? $_REQUEST['trade']:'';
 ?>
-<!DOCTYPE html>
-<html lang="en">
 <?php
 include ('include/header.html');
 ?>
@@ -109,6 +107,8 @@ include ('include/header.html');
 </fieldset>
 
 </form>
+</div>
+
 </body>
 </html>
 <?php
@@ -132,12 +132,10 @@ function display_confirmation_page()
 
     $result = mysql_query($sql) or die("Could not execute SQL query");
 ?>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Confirmation page</title>
-</head>
-<body>
+
+<?php
+include ('include/header.html');
+?>
 
 <?php
 	if($result)
@@ -146,6 +144,7 @@ function display_confirmation_page()
 	}
 }
 ?>
+</div>
 </body>
 </html>
 
