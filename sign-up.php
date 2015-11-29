@@ -1,7 +1,8 @@
 <?php require_once("include/db_connect.php");
 
-if(isset($_REQUEST['Submit']))
+if(isset($_REQUEST['submitted']))
 {
+	
 	$error = validate_form();
 	if($error)
 	{
@@ -10,13 +11,37 @@ if(isset($_REQUEST['Submit']))
 	else
 	{
 		display_confirmation_page();
+		// Minimal form validation:
+	if (!empty($_POST['firstName']) && !empty($_POST['email']) && !empty($_POST['dob']) && !empty($_POST['lastName'])) {
+	
+		// Create the body:
+		$body = "Name: {$_POST['firstName']}\nSurname: {$_POST['lastName']}\nDate Of Birth: {$_POST['dob']}\nEmail: {$_POST['email']}";
+		
+		// Make it no longer than 70 characters long:
+		$body = wordwrap($body, 70);
+	
+		// Send the email:
+		mail("{$_POST['email']}", 'Yourjobdone Registration', $body, "From: postmaster@localhost");
+		
+		// Print a message:
+		echo '<p><em>Thank you for registering. Please confirm your email.</em></p>';
+		
+		
+		// Clear $_POST (so that the form's not sticky):
+		$_POST = array();
+	
+	} else {
+		echo '<p style="font-weight: bold; color: #C00">Please fill out the form completely.</p>';
+	}
 	}
 }
 else
 {
-	display_sign_up_page('');
+	display_sign_up_page('');	
 }
+
 ?>
+
 
 <?php
 function display_sign_up_page($error)
@@ -40,6 +65,7 @@ include ('include/header.html');
 	   echo "<p>$error</p>\n";
 	}
 ?>
+
 
 <form action="<?php echo $self ?>" method="post" style="width:35%; padding:2em;">
 
@@ -102,6 +128,7 @@ include ('include/header.html');
 	</p>
 
 		<input type="submit" name="Submit" value="Submit" id="button">
+		<input type="hidden" name="submitted" value="TRUE" />
 		<input type="reset" name="Reset" value="Reset" id="button">
 </fieldset>
 
@@ -125,11 +152,10 @@ function display_confirmation_page()
 	$email = $_REQUEST['email'];
 	$trade = $_REQUEST['trade'];
 
-	$db_link = db_connect('tradesmendirectory');
-	$sql = "INSERT INTO tradesman(Title, First Name, Last Name,  Email, Password, D.O.B, Primary Trade)
-	       VALUES ('$title', '$firstName', '$lastName', '$email', '$password', '$dob', '$trade')";
+	$db_link = db_connect('$email_signup');
+	$sql = mysql_query("INSERT INTO `users` VALUES(NULL,'$firstName','$password','$email')");
 
-    $result = mysql_query($sql) or die("Could not execute SQL query");
+    $result = "";
 ?>
 
 <?php
@@ -141,6 +167,7 @@ include ('include/header.html');
 	{
 		echo "Thank you ".$name.". Your profile has been created.";
 	}
+
 }
 ?>
 </div>
