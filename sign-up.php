@@ -2,7 +2,7 @@
 
 if(isset($_REQUEST['submitted']))
 {
-	
+
 	$error = validate_form();
 	if($error)
 	{
@@ -13,31 +13,33 @@ if(isset($_REQUEST['submitted']))
 		display_confirmation_page();
 		// Minimal form validation:
 	if (!empty($_POST['firstName']) && !empty($_POST['email']) && !empty($_POST['dob']) && !empty($_POST['lastName'])) {
-	
+
 		// Create the body:
 		$body = "Name: {$_POST['firstName']}\nSurname: {$_POST['lastName']}\nDate Of Birth: {$_POST['dob']}\nEmail: {$_POST['email']}";
-		
+
 		// Make it no longer than 70 characters long:
 		$body = wordwrap($body, 70);
-	
+
 		// Send the email:
 		mail("{$_POST['email']}", 'Yourjobdone Registration', $body, "From: postmaster@localhost");
-		
+
 		// Print a message:
 		echo '<p><em>Thank you for registering. Please confirm your email.</em></p>';
-		
-		
-		// Clear $_POST (so that the form's not sticky):
+
+
+		// Clear $_POST (so that the forms not sticky):
 		$_POST = array();
-	
-	} else {
-		echo '<p style="font-weight: bold; color: #C00">Please fill out the form completely.</p>';
+
 	}
+	else
+	  {
+		echo '<p style="font-weight: bold; color: #C00">Please fill out the form completely.</p>';
+	  }
 	}
 }
 else
 {
-	display_sign_up_page('');	
+	display_sign_up_page('');
 }
 
 ?>
@@ -75,12 +77,12 @@ include ('include/header.html');
 <label>Title:</label><br>
 <select name="title" required>
 	<option value="" selected="selected">select</option>
-	<option value="mr">Mr</option>
-	<option value="miss">Miss</option>
-	<option value="mrs">Mrs</option>
-	<option value="ms">Ms</option>
-	<option value="dr">Dr</option>
-	<option value="prof">Prof</option>
+	<option value="Mr">Mr</option>
+	<option value="Miss">Miss</option>
+	<option value="Mrs">Mrs</option>
+	<option value="Ms">Ms</option>
+	<option value="Dr">Dr</option>
+	<option value="Prof">Prof</option>
 </select><br>
 
 <label>First Name:</label><br> <input type="text" name="firstName" required><br>
