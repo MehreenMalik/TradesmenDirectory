@@ -12,7 +12,7 @@ $_SESSION['user_tz'] = 'America/New_York';
 //$_SESSION = array();
 
 // Need the database connection:
-require_once('../mysqli_connect.php');
+require_once('mysqli_connect.php');
 
 // The language ID is stored in the session else Checks for a new language ID...
 if (isset($_GET['lid']) && is_numeric($_GET['lid'])) 
@@ -74,7 +74,13 @@ mysqli_free_result($r);
 	</style>
 </head>
 <body>
-
+<header id="header" class="site-header" role="banner">
+    <div id="header-inner" class="container sixteen columns over">
+        <hgroup class="one-third column alpha">
+            <h1 id="site-title" class="site-title">
+                <a href="index.html" id="logo" style="margin-left: 25%"><img src="images/logo.png" alt="TradesmenDirectory logo"/></a>
+            </h1>
+        </hgroup>
 <table width="90%" border="0" cellspacing="10" cellpadding="0" align="center">
 
   <tr> 

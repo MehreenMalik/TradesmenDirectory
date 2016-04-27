@@ -1,5 +1,5 @@
 <?php
-include "base.php";    
+include "base.php";
     //IF a user is logged on show their profile
     if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['username']))
     {
@@ -11,18 +11,18 @@ include "base.php";
     {
         $username = mysql_real_escape_string($_POST['username']);
         $password = md5(mysql_real_escape_string($_POST['password']));
-        
+
         $checklogin = mysql_query("SELECT * FROM users WHERE Username = '".$username."' AND Password = '".$password."'");
-        
+
         if(mysql_num_rows($checklogin) == 1)
         {
             $row = mysql_fetch_array($checklogin);
             $email = $row['EmailAddress'];
-            
+
             $_SESSION['Username'] = $username;
             $_SESSION['EmailAddress'] = $email;
             $_SESSION['LoggedIn'] = 1;
-            
+
             display_user_profile();
         }
         else
@@ -112,24 +112,20 @@ function display_login_page()
         </header>
 
         <div class="container" style="width:55%;">
-        <p>
-            Test profile <br>
-            username:jamesf<br> 
-            password:password
-        </p>
             <section class="consumerForm" style="float:left;">
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>"  name="loginform" id="loginform">
+                <h1>Consumer login Form</h1>
                     <fieldset>
                         <label for="username">Username:</label><input type="text" name="username" id="username" /><br />
                         <label for="password">Password:</label><input type="password" name="password" id="password" /><br />
                         <input type="submit" name="login" id="login" value="Login" />
-                        <a href="registerOptions.php">Register</a>
+                        <a href="consumerAccount.php">Register</a>
                     </fieldset>
                 </form>
             </section>
 
             <section  class="tradesmenForm" style="float:right;">
-                <form action="">
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>"  name="loginform" id="loginform">
                     <h1>Tradesmen login Form</h1>
                     <div>
                         <input type="text" placeholder="Username" required="" id="username" />
@@ -140,8 +136,7 @@ function display_login_page()
                     <div>
                         <input type="submit" value="Log in" />
                         <br>
-                        <a href="#">Lost your password?</a>
-                        <a href="#">Register</a>
+                        <a href="tradesmenAccount.php">Register</a>
                     </div>
                 </form>
             </section>
@@ -274,17 +269,27 @@ function display_user_profile()
         </header>
 
         <div class="container" style="width:50%;">
-        <h1>Your Profile:</h1>
+        <?php
+            $username = $_SESSION['Username'];
+            $query ="SELECT * from users WHERE Username = '".$username."'";
+            $result = @mysql_query($query) or die("Could not execute SQL query");
 
-            <!-- Display user data here-->
+            while($row = mysql_fetch_array($result))
+            {
+        ?>
+        <h1>
+            <?php echo $row["Username"];?>'s profile:
             <?php
-                $username = $_SESSION['Username'];
-                $query ="SELECT * from users WHERE Username = '".$username."'";
-                $result = @mysql_query($query) or die("Could not execute SQL query");
-
-                while($row = mysql_fetch_array($result))
+                if($row["Verified"] = 1)
                 {
+                    echo '<img width="30" height="30" src="images/Verified.png">';
+                }
+                else if($row["Verified"]= 2)
+                {
+                    echo '<img width="30" height="30" src="images/Unverified.png">';
+                }
             ?>
+        </h1>            
 
             <!-- User profile Image-->
             <?php echo '<img width="260" height="260" src="data:image/jpeg;base64,'.base64_encode( $row['profilePicture'] ).'"/>';?>
@@ -292,16 +297,16 @@ function display_user_profile()
             <table style="float: right;">
                 <tr>
                     <td>Username</td>
-                    <td><input type="text" value="<?php echo $row["Username"];?>"></input></td> 
-                </tr>
-                
-                <tr>
-                    <td>Password</td> 
-                    <td><input type="password" value="<?php echo $row["Password"];?>"></input></td> 
+                    <td><input type="text" value="<?php echo $row["Username"];?>"></input></td>
                 </tr>
 
                 <tr>
-                     <td>Email</td> 
+                    <td>Password</td>
+                    <td><input type="password" value="<?php echo $row["Password"];?>"></input></td>
+                </tr>
+
+                <tr>
+                     <td>Email</td>
                      <td><input type="email" value="<?php echo $row["EmailAddress"];?>"></input></td>
                 </tr>
 

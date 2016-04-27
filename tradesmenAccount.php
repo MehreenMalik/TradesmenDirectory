@@ -1,4 +1,58 @@
+<?php
+include "base.php";
+    if(!empty($_POST['username']) && !empty($_POST['password']))
+    {
+    	$username = mysql_real_escape_string($_POST['username']);
+        $password = md5(mysql_real_escape_string($_POST['password']));
+        $trade = mysql_real_escape_string($_POST['trade']);
+        $area = mysql_real_escape_string($_POST['area']);
+        $experience = mysql_real_escape_string($_POST['experience']);
+        $email = mysql_real_escape_string($_POST['email']);
 
+    	 $checkusername = mysql_query("SELECT * FROM tradesmen WHERE Username = '".$username."'");
+
+         if(mysql_num_rows($checkusername) == 1)
+         {
+         	echo "<h1>Error</h1>";
+            echo "<p>Sorry, that username is taken. Please go back and try again.</p>";
+         }
+         else
+         {
+         	$registerquery = mysql_query("INSERT INTO tradesmen (Username, Password, EmailAddress, Trade, Area, Experience) VALUES('".$username."', '".$password."', '".$email."', '".$trade."', '".$area."', '".$experience."')");
+            if($registerquery)
+            {
+            	echo "<h1>Success</h1>";
+            	echo "<p>Your account was successfully created. Please <a href=\"index.php\">click here to login</a>.</p>";
+        
+                // Create the body:
+                $body = "Name: {$_POST['firstName']}\nSurname: {$_POST['lastName']}\nDate Of Birth: {$_POST['dob']}\nEmail: {$_POST['email']}";
+                
+                // Make it no longer than 70 characters long:
+                $body = wordwrap($body, 70);
+            
+                // Send the email:
+                mail("{$_POST['email']}", 'Yourjobdone Registration', $body, "From: donotreply@mehreenmalik.com");
+                
+                // Print a message:
+                echo '<p><em>Thank you for registering. Please confirm your email.</em></p>';
+            }
+            else
+            {
+         		echo "<h1>Error</h1>";
+            	echo "<p>Sorry, your registration failed. Please go back and try again.</p>";
+            }
+         }
+    }
+    else
+    {
+    	register_consumer_accunt();
+    }
+?>
+
+<?php
+function register_consumer_accunt()
+{
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
@@ -70,21 +124,23 @@
     </header>
 
     <div class="container" style="width:60%;">
-        <section class="consumerForm" style="float:left;">
-            <p>
-                if you would like a consumer account please click here:<br>
-                <a href="consumerAccount.php">Consumer Account</a>
-            </p>
-        </section>
+       <h1>Register</h1>
 
-        <section  class="tradesmenForm" style="float:right;">
-            <p>
-                if you would like a tradesmen account please click here:<br>
-                <a href="#">Tradesmen Account</a>
-            </p>
-        </section>
+       <p>Please enter your details below to register.</p>
+
+    	<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="registerform" id="registerform">
+    	<fieldset>
+    		<label for="username">Username:</label><input type="text" name="username" id="username" /><br />
+    		<label for="password">Password:</label><input type="password" name="password" id="password" /><br />
+            <label for="email">Email Address:</label><input type="text" name="email" id="email" /><br />
+            <label for="trade">Trade:</label><input type="text" name="trade" id="trade" /><br />
+            <label for="area">Area:</label><input type="text" name="area" id="area" /><br />
+            <label for="experience">Experience:</label><input type="text" name="experience" id="experience" /><br />
+    		<input type="submit" name="register" id="register" value="Register" />
+    	</fieldset>
+    	</form>
     </div>
-    
+
     <footer>
     <div class="footer-inner container">
         <div class="social footer-columns one-third column">
@@ -133,3 +189,6 @@
 <script src="js/jquery.prettyPhoto.js"></script>
 </body>
 </html>
+<?php
+}
+?>

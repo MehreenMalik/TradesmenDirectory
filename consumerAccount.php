@@ -1,4 +1,55 @@
+<?php
+include "base.php";
+    if(!empty($_POST['username']) && !empty($_POST['password']))
+    {
+    	$username = mysql_real_escape_string($_POST['username']);
+        $password = md5(mysql_real_escape_string($_POST['password']));
+        $email = mysql_real_escape_string($_POST['email']);
 
+    	 $checkusername = mysql_query("SELECT * FROM users WHERE Username = '".$username."'");
+
+         if(mysql_num_rows($checkusername) == 1)
+         {
+         	echo "<h1>Error</h1>";
+            echo "<p>Sorry, that username is taken. Please go back and try again.</p>";
+         }
+         else
+         {
+         	$registerquery = mysql_query("INSERT INTO users (Username, Password, EmailAddress) VALUES('".$username."', '".$password."', '".$email."')");
+            if($registerquery)
+            {
+            	echo "<h1>Success</h1>";
+            	echo "<p>Your account was successfully created. Please <a href=\"index.php\">click here to login</a>.</p>";
+        
+                // Create the body:
+                $body = "Name: {$_POST['firstName']}\nSurname: {$_POST['lastName']}\nDate Of Birth: {$_POST['dob']}\nEmail: {$_POST['email']}";
+                
+                // Make it no longer than 70 characters long:
+                $body = wordwrap($body, 70);
+            
+                // Send the email:
+                mail("{$_POST['email']}", 'Yourjobdone Registration', $body, "From: donotreply@mehreenmalik.com");
+                
+                // Print a message:
+                echo '<p><em>Thank you for registering. Please confirm your email.</em></p>';
+            }
+            else
+            {
+         		echo "<h1>Error</h1>";
+            	echo "<p>Sorry, your registration failed. Please go back and try again.</p>";
+            }
+         }
+    }
+    else
+    {
+    	register_consumer_accunt();
+    }
+?>
+
+<?php
+function register_consumer_accunt()
+{
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
@@ -68,46 +119,13 @@
             </nav>
         </div>
     </header>
- 
+
     <div class="container" style="width:60%;">
-    <?php
-    if(!empty($_POST['username']) && !empty($_POST['password']))
-    {
-    	$username = mysql_real_escape_string($_POST['username']);
-        $password = md5(mysql_real_escape_string($_POST['password']));
-        $email = mysql_real_escape_string($_POST['email']);
-        
-    	 $checkusername = mysql_query("SELECT * FROM users WHERE Username = '".$username."'");
-         
-         if(mysql_num_rows($checkusername) == 1)
-         {
-         	echo "<h1>Error</h1>";
-            echo "<p>Sorry, that username is taken. Please go back and try again.</p>";
-         }
-         else
-         {
-         	$registerquery = mysql_query("INSERT INTO users (Username, Password, EmailAddress) VALUES('".$username."', '".$password."', '".$email."')");
-            if($registerquery)
-            {
-            	echo "<h1>Success</h1>";
-            	echo "<p>Your account was successfully created. Please <a href=\"index.php\">click here to login</a>.</p>";
-            }
-            else
-            {
-         		echo "<h1>Error</h1>";
-            	echo "<p>Sorry, your registration failed. Please go back and try again.</p>";    
-            }    	
-         }
-    }
-    else
-    {
-    	?>
-        
        <h1>Register</h1>
-        
+
        <p>Please enter your details below to register.</p>
-        
-    	<form method="post" action="register.php" name="registerform" id="registerform">
+
+    	<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" name="registerform" id="registerform">
     	<fieldset>
     		<label for="username">Username:</label><input type="text" name="username" id="username" /><br />
     		<label for="password">Password:</label><input type="password" name="password" id="password" /><br />
@@ -115,12 +133,8 @@
     		<input type="submit" name="register" id="register" value="Register" />
     	</fieldset>
     	</form>
-        
-       <?php
-    }
-    ?>
     </div>
-    
+
     <footer>
     <div class="footer-inner container">
         <div class="social footer-columns one-third column">
@@ -169,3 +183,6 @@
 <script src="js/jquery.prettyPhoto.js"></script>
 </body>
 </html>
+<?php
+}
+?>

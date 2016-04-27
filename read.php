@@ -45,7 +45,7 @@ if ($tid) // Get the messages in this thread...
 		}
 		
 		// Print the message:
-		echo "<p>{$messages['username']} ({$messages['posted']})<br />{$messages['message']}</p><br />\n";
+		echo "<p>{$messages['username']} <br />{$messages['message']}</p><br />\n";
 	}
 		
 	// Show the form to post a message:

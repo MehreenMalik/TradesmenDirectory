@@ -1,5 +1,4 @@
 <?php
-
     // This page shows the threads in a forum.
     include ('includes/header.html');
     // Retrieve all the messages in this forum...
@@ -29,7 +28,6 @@
                 <td align="left" width="20%"><em>' . $words['posted_by'] . '</em>:</td>
                 <td align="center" width="10%"><em>' . $words['posted_on'] . '</em>:</td>
                 <td align="center" width="10%"><em>' . $words['replies'] . '</em>:</td>
-                <td align="center" width="10%"><em>' . $words['latest_reply'] . '</em>:</td>
             </tr>';
 
         // Fetch each thread:
